@@ -22,9 +22,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  .message-box{
+    margin: 0 14px 0 6px;
+    display: flex;
+    cursor: pointer;
+  }
 }
 //
 .content-box{
-  margin: 20px 0;
   min-height: calc(100% - 20px);
+  max-width: calc(100vw - 280px);
+  min-width: 920px;
 }

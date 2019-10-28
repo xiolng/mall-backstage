@@ -35,7 +35,6 @@ class banned extends Component {
     }
 
     componentDidMount() {
-        console.log(111, this.props)
         this.getData()
         this.setState({
             footer: this.state.selectedRowKeys.length ? this.footerTemp : undefined

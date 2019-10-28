@@ -1,10 +1,20 @@
 import React from "react"
 import {Route, Switch} from "react-router-dom"
-import Login from "@/view/login"
-import Index from "@/view"
-import NotFound from "@/view/404/index"
-import LayoutModule from "@/view/layout"
+import Login from "@/view/login"  //登录页
+import Index from "@/view" // 首页，暂时不用跳转到其他页面
+import NotFound from "@/view/404/index" // 404 找不到的跳到此页面
+import LayoutModule from "@/view/layout" // 布局框架
 import banned from "@/view/banned";
+
+/**
+ * @path 路由名称
+ * @name 菜单名称
+ * @hideMenu 是否显示在左侧菜单
+ * @exact 绝对地址
+ * @parent 父路由
+ * @routes 子路由
+ * @type {*[]}
+ */
 
 export const routeConfig = [
   {
@@ -29,34 +39,26 @@ export const routeConfig = [
       },
       {
         path: "/system",
-        name: "system",
-        icon: "user",
+        name: "系统设置",
+        icon: "setting",
         parent: "Home",
         component: banned,
         hideMenu: false,
         children: [
           {
-            path: '/router',
-            name: 'router',
-            icon: 'user',
+            path: '/',
+            name: '菜单管理',
+            icon: 'menu',
             parent: 'system',
             component: () => (<div>2222</div>),
-            hideMenu: true
-          },
-          {
-            path: '/routers',
-            name: 'routers',
-            icon: 'user',
-            parent: 'system',
-            component: () => (<div>3333</div>),
             hideMenu: true
           }
         ]
       },
       {
-        path: "/systems",
-        name: "systems",
-        icon: "user",
+        path: "/baseManage",
+        name: "基础数据",
+        icon: "bar-chart",
         parent: "Home",
         component: banned,
         hideMenu: false,

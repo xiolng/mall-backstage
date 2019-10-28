@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import {Button, Checkbox, Form, Icon, Input} from "antd"
 import {Redirect} from "react-router-dom"
 import BGParticle from "../../utils/bgParticle"
-// import logo from "../../assets/images/logo.png"
+import {LoginApi} from "@/api/loginApi";
 
 import "./login.scss"
 import {setTokens} from "@/store/action"
@@ -17,6 +17,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        // 登录页动画
         this.particle = new BGParticle("loginBox")
         this.particle.init()
     }
@@ -27,12 +28,13 @@ class Login extends Component {
             if (!err) {
                 // console.log("Received values of form: ", values)
                 let {username, password} = values
-                window.axios.post("api/auth/login", {username, password})
+                LoginApi({username, password})
                     .then(res => {
                         this.props.setTokens(`token ${res.data.token}`)
                         this.setState({
                             isLogin: true
                         })
+                        this.particle.destory()
                     })
             }
         })

@@ -1,3 +1,10 @@
+/**
+ * echarts 图表 防止不动态更新
+ * @param func
+ * @param wait
+ * @param immediate
+ * @returns {function(...[*]=): *}
+ */
 export function debounce(func, wait, immediate) {
     let timeout, args, context, timestamp, result
 

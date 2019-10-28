@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {Avatar, Dropdown, Menu} from "antd"
-import {clearStorage, goLogout} from "@/utils/config"
+import {clearStorage, Logout} from "@/utils/config"
 import {setTokens, setUsers} from "@/store/action"
 import {connect} from "react-redux"
 import './style.scss'
@@ -13,19 +13,19 @@ class Users extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.isToken()
         let userList = this.props.userList
-        if (!userList && this.props.token) {
-            window.axios.get("/api/v1.0/current_user").then(res => {
-                this.props.setUsers(res.data)
-            })
-        }
+        // if (!userList && this.props.token) {
+        //     window.axios.get("/api/v1.0/current_user").then(res => {
+        //         this.props.setUsers(res.data)
+        //     })
+        // }
     }
 
     logout() {
         clearStorage()
-        goLogout()
+        Logout()
         this.isToken()
     }
 
@@ -45,11 +45,12 @@ class Users extends Component {
                 </Menu.Item>
             </Menu>
         )
-        const userList = this.props.userList
+        // const userList = this.props.userList
+        const userList = {username: 'xiolng'}
         return this.state.isToken ? (
             <Dropdown overlay={menu}>
                 <div style={{cursor: "pointer"}}>
-                    <Avatar icon={"user"} />
+                    <Avatar style={{ backgroundColor: '#87d068' }} icon="user" />
                     <span className={'userName'}>
                         {(userList && userList.username) || ""}
                     </span>

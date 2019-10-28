@@ -9,12 +9,15 @@ class NotFound extends Component {
     constructor() {
         super()
         this.state = {
-            times: 5
+            times: 5, // 秒
         }
         this.getDate()
         this.pushLink = this.pushLink.bind(this)
     }
 
+    /**
+     * 倒计时，返回首页
+     */
     getDate() {
         if (this.state.times >= 1) {
             setTimeout(() => {
@@ -28,12 +31,16 @@ class NotFound extends Component {
         }
     }
 
+    /**
+     * 返回默认页
+     * @param e
+     */
     pushLink(e) {
         e && e.preventDefault()
         e && e.stopPropagation()
         this.props.setBreads({
-            parent: 'Home',
-            name: 'dashboard'
+            parent: '系统设置',
+            name: '菜单管理'
         })
         this.props.history.push("/")
     }
@@ -48,7 +55,7 @@ class NotFound extends Component {
             无此页面，<span className={"colorTxt"}>{this.state.times}</span>
             秒钟后返回
                     </span>
-                    <Link to={'/dashboard'} onClick={e => this.pushLink(e)}>首页</Link>
+                    <Link to={'/'} onClick={e => this.pushLink(e)}>首页</Link>
                 </div>
             </div>
         )

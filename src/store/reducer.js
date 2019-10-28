@@ -2,8 +2,8 @@ import {SETBREAD, SETTOKEN, SETUSER} from "@/store/action-type"
 
 const initState = {
     breadcrumb: JSON.parse(localStorage.getItem("bread")) || {
-        parent: "Home",
-        name: "router"
+        parent: "系统设置",
+        name: "菜单管理"
     },
     token: localStorage.getItem("token") || '',
     userList: JSON.parse(localStorage.getItem("userList")) || ''

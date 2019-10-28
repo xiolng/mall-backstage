@@ -11,7 +11,7 @@ class Index extends Component {
     }
 
     componentDidMount() {
-        this.props.history.push('/banned')
+        this.props.history.push('/system')
 
     }
 
