@@ -1,20 +1,19 @@
-import React, {Component} from "react"
-import {Icon, Menu} from "antd"
-import {Link} from "react-router-dom"
-import {routeConfig} from "@/router" //路由列表
-import {setBreads} from '@/store/action' // 设置面包屑
-import {connect} from "react-redux"
+import React, { Component } from 'react';
+import { Icon, Menu } from 'antd';
+import { Link } from 'react-router-dom';
+import { routeConfig } from '@/router'; // 路由列表
+import { setBreads } from '@/store/action'; // 设置面包屑
+import { connect } from 'react-redux';
 
-const {SubMenu} = Menu
+const { SubMenu } = Menu;
 
 class Menus extends Component {
-
   constructor() {
     super();
     this.state = {
       keys: 'router'
-    }
-    this.handleClick = this.handleClick.bind(this)
+    };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -28,18 +27,18 @@ class Menus extends Component {
   handleClick(e) {
     this.setState({
       keys: e.key
-    })
+    });
     if (e.keyPath.length >= 2) {
       this.setBreadcrumb({
         parent: e.keyPath[1],
         name: e.keyPath[0]
-      })
-      return false
+      });
+      return false;
     }
     this.setBreadcrumb({
       parent: e.keyPath[0],
       name: e.keyPath[0]
-    })
+    });
   }
 
   /**
@@ -50,7 +49,7 @@ class Menus extends Component {
     this.props.setBreads({
       parent: item.parent,
       name: item.name
-    })
+    });
   }
 
   /**
@@ -58,8 +57,8 @@ class Menus extends Component {
    * @returns {string[]}
    */
   getNavList() {
-    return routeConfig[1].routes.map(item => {
-      let menuList = null
+    return routeConfig[1].routes.map((item) => {
+      let menuList = null;
         if (!item.hideMenu) {
           menuList = (
             item.children ? (
@@ -73,7 +72,7 @@ class Menus extends Component {
                 }
               >
                 {
-                  item.children.map(c => (
+                  item.children.map((c) => (
                     <Menu.Item key={c.name}>
                       <Link
                         to={`${item.path}${c.path}`}
@@ -95,11 +94,11 @@ class Menus extends Component {
                 </Link>
               </Menu.Item>
             )
-          )
+          );
         }
-        return menuList
+        return menuList;
       }
-    )
+    );
   }
 
   render() {
@@ -113,16 +112,16 @@ class Menus extends Component {
       >
         {this.getNavList()}
       </Menu>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, OwnProps) => ({
   breadcrumb: state.mainConfig.breadcrumb
-})
+});
 
 const mapDispatchToProps = {
   setBreads
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menus)
+export default connect(mapStateToProps, mapDispatchToProps)(Menus);

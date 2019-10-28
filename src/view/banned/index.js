@@ -1,17 +1,16 @@
-import React, {Component} from 'react'
-import {Button, Col, Modal, Row, Table, message, Search} from "antd"
-import AddBanned from './AddBanned'
-import './style.scss'
-import SearchModal from './SearchModal'
+import React, { Component } from 'react';
+import { Button, Col, Modal, Row, Table, message, Search } from 'antd';
+import AddBanned from './AddBanned';
+import './style.scss';
+import SearchModal from './SearchModal';
 
 /**
  * 封禁策略
  */
 
-
 class banned extends Component {
     constructor() {
-        super()
+        super();
         this.state = {
             tableData: [],
             visible: false,
@@ -27,26 +26,26 @@ class banned extends Component {
             selectedRowKeys: [],
             visibleDeleteAll: false,
             footer: this.footerTemp
-        }
-        this.handleCancel = this.handleCancel.bind(this)
-        this.handleOk = this.handleOk.bind(this)
-        this.onSelectChange = this.onSelectChange.bind(this)
-        this.footerTemp = this.footerTemp.bind(this)
+        };
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleOk = this.handleOk.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
+        this.footerTemp = this.footerTemp.bind(this);
     }
 
     componentDidMount() {
-        this.getData()
+        this.getData();
         this.setState({
             footer: this.state.selectedRowKeys.length ? this.footerTemp : undefined
-        })
+        });
     }
 
     footerTemp() {
-        return <Button type={'danger'} onClick={() => this.setState({visibleDeleteAll: true})}>批量删除</Button>
+        return <Button type={'danger'} onClick={() => this.setState({ visibleDeleteAll: true })}>批量删除</Button>;
     }
 
     getData(current, pageSize, key, value) {
-        window.axios.get(`/api/v1.0/blocked_ips?page=${current || 1}&page_size=${pageSize || 10}&key=${key || ''}&value=${value || ''}`).then(res => {
+        window.axios.get(`/api/v1.0/blocked_ips?page=${current || 1}&page_size=${pageSize || 10}&key=${key || ''}&value=${value || ''}`).then((res) => {
             this.setState((preState) => ({
                 tableData: res.data.data,
                 pagination: {
@@ -56,14 +55,14 @@ class banned extends Component {
                     total: res.data.total,
                     footer: undefined
                 }
-            }))
-        })
+            }));
+        });
     }
 
     showModal() {
         this.setState({
             visible: true
-        })
+        });
     }
 
     tableChange(pagination, filters, sorter) {
@@ -74,35 +73,35 @@ class banned extends Component {
                 showSizeChanger: true
             }
         }, () => {
-            this.getData(pagination.current, pagination.pageSize, this.state.key, this.state.value)
-        })
+            this.getData(pagination.current, pagination.pageSize, this.state.key, this.state.value);
+        });
     }
 
     handleOk(e) {
-        e.preventDefault()
-        let form = this.formRef.props.form
+        e.preventDefault();
+        const form = this.formRef.props.form;
         form.validateFields((err, data) => {
             if (!err) {
-                window.axios.post(`/api/v1.0/blocked_ips`, {
+                window.axios.post('/api/v1.0/blocked_ips', {
                     data: {
                         ip: data.ip || '',
                         host: data.host || '',
                         time_value: +data.time_value || 0
                     }
-                }).then(res => {
-                    message.info('新建成功')
-                    this.getData()
+                }).then((res) => {
+                    message.info('新建成功');
+                    this.getData();
                     this.setState({
                         visible: false
-                    })
-                    form.resetFields()
-                })
-                return false
+                    });
+                    form.resetFields();
+                });
+                return false;
             }
             this.setState({
                 visible: true
-            })
-        })
+            });
+        });
     }
 
     /**
@@ -110,47 +109,47 @@ class banned extends Component {
      * @param formRef
      */
     saveFormRef = (formRef) => {
-        this.formRef = formRef
+        this.formRef = formRef;
     }
 
     deleteBanned(item) {
         this.setState({
             id: item.id,
             visibleDelete: true
-        })
+        });
     }
 
     deleteOk() {
-        window.axios.delete(`/api/v1.0/blocked_ips/${this.state.id}`).then(res => {
+        window.axios.delete(`/api/v1.0/blocked_ips/${this.state.id}`).then((res) => {
             this.setState({
                 visibleDelete: false
-            })
-            this.getData()
-        })
+            });
+            this.getData();
+        });
     }
 
     handleCancel() {
         this.setState({
             visible: false,
             visibleDelete: false
-        })
+        });
     }
 
     deleteAll() {
-        window.axios.delete(`/api/v1.0/blocked_ips?id=${this.state.selectedRowKeys}`).then(res => {
+        window.axios.delete(`/api/v1.0/blocked_ips?id=${this.state.selectedRowKeys}`).then((res) => {
             this.setState({
                 visibleDeleteAll: false
             }, () => {
-                this.getData()
-            })
-        })
+                this.getData();
+            });
+        });
     }
 
     onSelectChange(selectedRowKeys, selectedRows) {
         this.setState({
             selectedRowKeys,
             footer: selectedRowKeys.length ? this.footerTemp : undefined
-        })
+        });
     }
 
     render() {
@@ -202,28 +201,28 @@ class banned extends Component {
                 render: (text, record, index) =>
                     <Button size={'small'} onClick={() => this.deleteBanned(record, index)}>删除</Button>
             }
-        ]
-        let {selectedRowKeys} = this.state
+        ];
+        const { selectedRowKeys } = this.state;
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange
-        }
-        let searchData = value => {
+        };
+        const searchData = (value) => {
             this.setState({
                 key: value.key,
                 value: value.value
             }, () => {
-                this.getData(this.state.pagination.current, this.state.pagination.pageSize, this.state.key, this.state.value)
-            })
-        }
+                this.getData(this.state.pagination.current, this.state.pagination.pageSize, this.state.key, this.state.value);
+            });
+        };
         return (
             <div>
-                <Row type={"flex"} justify={"end"} style={{marginBottom: "20px"}}>
+                <Row type={'flex'} justify={'end'} style={{ marginBottom: '20px' }}>
                     <Col span={18}>
-                        <SearchModal callback={value => searchData(value)} />
+                        <SearchModal callback={(value) => searchData(value)} />
                     </Col>
-                    <Col span={6} style={{textAlign: 'right'}}>
-                        <Button type={"primary"} onClick={() => this.showModal()}>
+                    <Col span={6} style={{ textAlign: 'right' }}>
+                        <Button type={'primary'} onClick={() => this.showModal()}>
                             新增策略
                         </Button>
                     </Col>
@@ -235,7 +234,7 @@ class banned extends Component {
                     onChange={(p, f, s) => this.tableChange(p, f, s)}
                     pagination={this.state.pagination}
                     rowKey={'id'}
-                    scroll={{x: 1000}}
+                    scroll={{ x: 1000 }}
                     footer={this.state.footer}
                 />
 
@@ -265,8 +264,8 @@ class banned extends Component {
                     this.props.children
                 }
             </div>
-        )
+        );
     }
 }
 
-export default banned
+export default banned;

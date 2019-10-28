@@ -1,2 +1,2 @@
-import axios from '@/axios'
-export const LoginApi = data => axios.post('/',data) // 登录
+import axios from '@/axios';
+export const LoginApi = (data) => axios.post('/', data); // 登录

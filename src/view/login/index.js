@@ -1,78 +1,78 @@
-import React, {Component} from "react"
-import {Button, Checkbox, Form, Icon, Input} from "antd"
-import {Redirect} from "react-router-dom"
-import BGParticle from "../../utils/bgParticle"
-import {LoginApi} from "@/api/loginApi";
+import React, { Component } from 'react';
+import { Button, Checkbox, Form, Icon, Input } from 'antd';
+import { Redirect } from 'react-router-dom';
+import BGParticle from '../../utils/bgParticle';
+import { LoginApi } from '@/api/loginApi';
 
-import "./login.scss"
-import {setTokens} from "@/store/action"
-import {connect} from "react-redux"
+import './login.scss';
+import { setTokens } from '@/store/action';
+import { connect } from 'react-redux';
 
 class Login extends Component {
     constructor() {
-        super()
+        super();
         this.state = {
             isLogin: false
-        }
+        };
     }
 
     componentDidMount() {
         // 登录页动画
-        this.particle = new BGParticle("loginBox")
-        this.particle.init()
+        this.particle = new BGParticle('loginBox');
+        this.particle.init();
     }
 
-    handleSubmit = e => {
-        e.preventDefault()
+    handleSubmit = (e) => {
+        e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 // console.log("Received values of form: ", values)
-                let {username, password} = values
-                LoginApi({username, password})
-                    .then(res => {
-                        this.props.setTokens(`token ${res.data.token}`)
+                const { username, password } = values;
+                LoginApi({ username, password })
+                    .then((res) => {
+                        this.props.setTokens(`token ${res.data.token}`);
                         this.setState({
                             isLogin: true
-                        })
-                        this.particle.destory()
-                    })
+                        });
+                        this.particle.destory();
+                    });
             }
-        })
+        });
     };
 
     render() {
-        const {getFieldDecorator} = this.props.form
+        const { getFieldDecorator } = this.props.form;
         return !this.state.isLogin ? (
-            <div id={"loginBox"} className="loginBox">
+            <div id={'loginBox'} className="loginBox">
                 <div className="loginContent">
                     <div className="logo">
-                        {/*<img src={logo} alt="友信金服" />*/}
+                        {/* <img src={logo} alt="友信金服" /> */}
                     </div>
                     <div className="loginForm">
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <Form.Item>
-                                {getFieldDecorator("username", {
+                                {getFieldDecorator('username', {
                                     rules: [
-                                        {required: true, message: "Please input your username!"}
+                                        { required: true, message: 'Please input your username!' }
                                     ]
                                 })(
                                     <Input
                                         prefix={
-                                            <Icon type="user" style={{color: "rgba(0,0,0,.25)"}} />
+                                            <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                                         }
                                         placeholder="Username"
                                     />
                                 )}
                             </Form.Item>
                             <Form.Item>
-                                {getFieldDecorator("password", {
+                                {getFieldDecorator('password', {
                                     rules: [
-                                        {required: true, message: "Please input your Password!"}
+                                        { required: true, message: 'Please input your Password!' }
                                     ]
                                 })(
                                     <Input
                                         prefix={
-                                            <Icon type="lock" style={{color: "rgba(0,0,0,.25)"}} />
+                                            <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                                         }
                                         type="password"
                                         placeholder="Password"
@@ -80,8 +80,8 @@ class Login extends Component {
                                 )}
                             </Form.Item>
                             <Form.Item>
-                                {getFieldDecorator("remember", {
-                                    valuePropName: "checked",
+                                {getFieldDecorator('remember', {
+                                    valuePropName: 'checked',
                                     initialValue: true
                                 })(<Checkbox>Remember me</Checkbox>)}
                                 <Button
@@ -97,17 +97,17 @@ class Login extends Component {
                 </div>
             </div>
         ) : (
-            <Redirect to={"/"} />
-        )
+            <Redirect to={'/'} />
+        );
     }
 }
 
 const mapStateToProps = (state, OwnProps) => ({
     token: state.mainConfig.token
-})
+});
 
 const mapDispatchToProps = {
     setTokens
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login));

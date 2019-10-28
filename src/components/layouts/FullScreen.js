@@ -1,9 +1,8 @@
-import React,{Component} from "react";
-import {Icon, Tooltip} from "antd";
+import React, { Component } from 'react';
+import { Icon, Tooltip } from 'antd';
 
-export default class FullScreen extends Component{
-
-  clickFull(){
+export default class FullScreen extends Component {
+  clickFull() {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
     } else {
@@ -13,15 +12,15 @@ export default class FullScreen extends Component{
     }
   }
 
-  render(){
+  render() {
     return (
       <Tooltip placement={'top'} title={'全屏'}>
         <Icon
-          style={{color: '#333', marginRight: '10px', fontSize:"20px"}}
+          style={{ color: '#333', marginRight: '10px', fontSize: '20px' }}
           type={'fullscreen'}
           onClick={() => this.clickFull()}
         />
       </Tooltip>
-    )
+    );
   }
 }

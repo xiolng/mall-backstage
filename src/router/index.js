@@ -1,10 +1,10 @@
-import React from "react"
-import {Route, Switch} from "react-router-dom"
-import Login from "@/view/login"  //登录页
-import Index from "@/view" // 首页，暂时不用跳转到其他页面
-import NotFound from "@/view/404/index" // 404 找不到的跳到此页面
-import LayoutModule from "@/view/layout" // 布局框架
-import banned from "@/view/banned";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Login from '@/view/login'; // 登录页
+import Index from '@/view'; // 首页，暂时不用跳转到其他页面
+import NotFound from '@/view/404/index'; // 404 找不到的跳到此页面
+import LayoutModule from '@/view/layout'; // 布局框架
+import banned from '@/view/banned';
 
 /**
  * @path 路由名称
@@ -18,30 +18,30 @@ import banned from "@/view/banned";
 
 export const routeConfig = [
   {
-    path: "/login",
-    name: "login",
+    path: '/login',
+    name: 'login',
     hideMenu: true,
     component: Login,
     exact: true
   },
   {
-    name: "Home",
-    icon: "user",
+    name: 'Home',
+    icon: 'user',
     routes: [
       {
-        path: "/",
-        name: "index",
-        icon: "user",
-        parent: "Home",
+        path: '/',
+        name: 'index',
+        icon: 'user',
+        parent: 'Home',
         component: Index,
         hideMenu: true,
         exact: true
       },
       {
-        path: "/system",
-        name: "系统设置",
-        icon: "setting",
-        parent: "Home",
+        path: '/system',
+        name: '系统设置',
+        icon: 'setting',
+        parent: 'Home',
         component: banned,
         hideMenu: false,
         children: [
@@ -56,19 +56,19 @@ export const routeConfig = [
         ]
       },
       {
-        path: "/baseManage",
-        name: "基础数据",
-        icon: "bar-chart",
-        parent: "Home",
+        path: '/baseManage',
+        name: '基础数据',
+        icon: 'bar-chart',
+        parent: 'Home',
         component: banned,
         hideMenu: false,
         exact: true
       },
       {
-        path: "/*",
-        name: "notFound",
-        icon: "user",
-        parent: "Home",
+        path: '/*',
+        name: 'notFound',
+        icon: 'user',
+        parent: 'Home',
         hideMenu: true,
         component: NotFound,
         exact: false
@@ -76,20 +76,20 @@ export const routeConfig = [
     ]
   },
   {
-    path: "/*",
-    name: "notFound",
+    path: '/*',
+    name: 'notFound',
     hideMenu: true,
     component: NotFound,
     exact: false
   }
-]
+];
 
 export const routeList = () => (
   <Switch>
     {
       routeConfig.map((item, index) => {
         if (!item.routes) {
-          return (<Route exact={item.exact} path={item.path} component={item.component} key={index}/>)
+          return (<Route exact={item.exact} path={item.path} component={item.component} key={index}/>);
         }
         if (item.name === 'Home') {
           return (
@@ -99,19 +99,19 @@ export const routeList = () => (
                   item.routes.map((v, i) => {
                     return v.children ? (
                       <Route path={v.path} key={i}>
-                        {v.children.map(c => (<Route path={`${v.path}${c.path}`} component={c.component} key={c.path} />))}
+                        {v.children.map((c) => (<Route path={`${v.path}${c.path}`} component={c.component} key={c.path} />))}
                       </Route>
                     ) : (
                       <Route exact={v.exact} path={v.path} component={v.component} key={i}/>
-                    )
+                    );
                   })
                 }
               </Switch>
             </LayoutModule>
-          )
+          );
         }
-        return true
+        return true;
       })
     }
   </Switch>
-)
+);

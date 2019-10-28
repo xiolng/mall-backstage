@@ -1,11 +1,11 @@
-import axios from "axios"
-import {message} from 'antd'
-import {openUrl} from "@/utils/config"
+import axios from 'axios';
+import { message } from 'antd';
+import { openUrl } from '@/utils/config';
 
 axios.interceptors.request.use(
-    config => {
-        let links = window.location
-        let token = localStorage.getItem('token')
+    (config) => {
+        const links = window.location;
+        const token = localStorage.getItem('token');
         // if (!token && (links.search.indexOf('tgtId') <= -1) && (links.pathname !== '/login')) {
         //     // console.log('没有token，没有sso请求参数，不是登录页')
         //     const links = window.location.origin
@@ -17,21 +17,21 @@ axios.interceptors.request.use(
         // }
         // // console.log(config);
         // config.headers.Authorization = token
-        return config
+        return config;
     },
-    error => {
+    (error) => {
         // console.log(error)
-        return Promise.reject(error)
+        return Promise.reject(error);
     }
-)
+);
 
 axios.interceptors.response.use(
-    response => {
+    (response) => {
         // console.log(111, response);
-        return response
+        return response;
     },
-    error => {
-        message.error(error.response.data.message)
+    (error) => {
+        message.error(error.response.data.message);
         // console.log(222, error.response)
         // if (error.response.status === 401) {
         //     localStorage.clear()
@@ -41,8 +41,8 @@ axios.interceptors.response.use(
         //         links
         //     })
         // }
-        return Promise.reject(error)
+        return Promise.reject(error);
     }
-)
+);
 
-export default axios
+export default axios;
