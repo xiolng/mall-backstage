@@ -70,10 +70,10 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "npm run lint:fix && node scripts/build.js",
     "test": "node scripts/test.js",
     "lint:ext": "eslint --ext .js src",
-    "lint:fix": "eslint --fix --ext .js src"
+    "lint:fix": "cross-env NODE_ENV=production eslint --fix --ext .js src"
   },
   "browserslist": {
     "production": [
@@ -137,6 +137,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.12.2",
+    "cross-env": "^6.0.3",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",

@@ -38,6 +38,23 @@ export const routeConfig = [
         exact: true
       },
       {
+        path: '/merchant',
+        name: '商户管理',
+        icon: 'setting',
+        parent: 'Home',
+        hideMenu: false,
+        children: [
+          {
+            path: '/',
+            name: '菜单管理',
+            icon: 'menu',
+            parent: 'system',
+            component: () => (<div>2222</div>),
+            hideMenu: true
+          }
+        ]
+      },
+      {
         path: '/system',
         name: '系统设置',
         icon: 'setting',

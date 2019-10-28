@@ -33,9 +33,9 @@ module.exports = {
         "indent": [0, 4, {
             "SwitchCase": 1
         }], //tab缩进4格
-        // "no-extra-semi": "error", //禁止分号
+        "no-extra-semi": "error", //禁止分号
         "semi": [
-          "error",
+            process.env.NODE_ENV === 'production' ? 2 : 0,
           "always"
         ],
         "eol-last": 1, //

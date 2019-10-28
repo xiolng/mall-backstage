@@ -15,7 +15,7 @@ class Index extends Component {
     }
 
     render() {
-        return <div></div>;
+        return <div/>;
     }
 }
 
