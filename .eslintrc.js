@@ -1,4 +1,4 @@
-{
+module.exports = {
     "parser": "babel-eslint",
     "env": {
         "browser": true,
@@ -28,7 +28,7 @@
         "ecmaVersion": 6,
         "sourceType": "module"
     },
-    "extends": "react-app",
+    "extends": "standard",
     "rules": {
         "indent": [0, 4, {
             "SwitchCase": 1
