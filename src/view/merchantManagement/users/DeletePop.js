@@ -1,5 +1,5 @@
-import React from "react";
-import {Modal} from "antd";
+import React from 'react';
+import {Modal} from 'antd';
 
 class DeletePop extends React.Component {
 
@@ -15,4 +15,4 @@ class DeletePop extends React.Component {
 
 }
 
-export default DeletePop
+export default DeletePop;

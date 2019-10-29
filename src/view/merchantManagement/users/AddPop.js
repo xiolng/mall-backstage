@@ -1,12 +1,12 @@
-import React from "react";
-import {Form, Input, Modal} from "antd";
+import React from 'react';
+import {Form, Input, Modal} from 'antd';
 
 class AddPop extends React.Component {
 
 
   render() {
-    const {form, saveAdd, cancelAdd, showAdd} = this.props
-    const {getFieldDecorator} = form
+    const {form, saveAdd, cancelAdd, showAdd} = this.props;
+    const {getFieldDecorator} = form;
     return (
       <div>
         <Modal
@@ -25,8 +25,8 @@ class AddPop extends React.Component {
           </Form>
         </Modal>
       </div>
-    )
+    );
   }
 }
 
-export default Form.create({})(AddPop)
+export default Form.create({})(AddPop);

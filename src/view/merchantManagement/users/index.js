@@ -1,32 +1,32 @@
 import React from 'react';
 import {Table, Divider, Button, Tooltip, Row, Col, Input, message, Form} from 'antd';
-import AddPop from "_view/merchantManagement/users/AddPop";
-import DeletePop from "_view/merchantManagement/users/DeletePop";
+import AddPop from '_view/merchantManagement/users/AddPop';
+import DeletePop from '_view/merchantManagement/users/DeletePop';
 
-const {Search} = Input
+const {Search} = Input;
 
 class MerchantUser extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       list: [],
       showAdd: false,
       showDel: false
-    }
+    };
 
-    this.saveFormRef = this.saveFormRef.bind(this)
-    this.saveAdd = this.saveAdd.bind(this)
-    this.cancelAdd = this.cancelAdd.bind(this)
-    this.saveDel = this.saveDel.bind(this)
+    this.saveFormRef = this.saveFormRef.bind(this);
+    this.saveAdd = this.saveAdd.bind(this);
+    this.cancelAdd = this.cancelAdd.bind(this);
+    this.saveDel = this.saveDel.bind(this);
   }
 
   componentDidMount() {
-    this.getData()
+    this.getData();
   }
 
   // 获取列表
   getData() {
-    const data = []
+    const data = [];
     for (let i = 1; i < 20; i++) {
       data.push({
         key: `'${i}'`,
@@ -34,11 +34,11 @@ class MerchantUser extends React.Component {
         address: `New York No. 1 Lake Park${i}`,
         integral: `55${i}`,
         platformMoney: `66${i}`
-      })
+      });
     }
     this.setState({
       list: data
-    })
+    });
   }
 
   /**
@@ -46,7 +46,7 @@ class MerchantUser extends React.Component {
    * @param value
    */
   searchName(value) {
-    console.log(value)
+    console.log(value);
   }
 
   /**
@@ -54,14 +54,14 @@ class MerchantUser extends React.Component {
    * @param formRef
    */
   saveFormRef = (formRef) => {
-    this.formRef = formRef
+    this.formRef = formRef;
   }
 
   // 添加弹窗
   openAdd() {
     this.setState({
       showAdd: true
-    })
+    });
   }
 
   /**
@@ -69,22 +69,22 @@ class MerchantUser extends React.Component {
    * @param e 确定
    */
   saveAdd(e) {
-    e.preventDefault()
-    const {form} = this.formRef.props
+    e.preventDefault();
+    const {form} = this.formRef.props;
     form.validateFields((err, data) => {
       if (!err) {
-        message.info('新建成功')
-        this.getData()
-        form.resetFields()
+        message.info('新建成功');
+        this.getData();
+        form.resetFields();
         this.setState({
           showAdd: false
-        })
-        return false
+        });
+        return false;
       }
       this.setState({
         showAdd: true
-      })
-    })
+      });
+    });
   }
 
   // 取消弹窗
@@ -92,21 +92,21 @@ class MerchantUser extends React.Component {
     this.setState({
       showAdd: false,
       showDel: false
-    })
+    });
   }
 
   // 打开删除弹窗
   openDel() {
     this.setState({
       showDel: true
-    })
+    });
   }
 
   // 删除弹窗
   saveDel() {
     this.setState({
       showDel: false
-    })
+    });
   }
 
   render() {
