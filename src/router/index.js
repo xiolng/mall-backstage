@@ -4,6 +4,7 @@ import Login from '@/view/login'; // 登录页
 import Index from '@/view'; // 首页，暂时不用跳转到其他页面
 import NotFound from '@/view/404/index'; // 404 找不到的跳到此页面
 import LayoutModule from '@/view/layout'; // 布局框架
+import MerchantUser from '_view/merchantManagement/users'; // 会员
 import banned from '@/view/banned';
 
 /**
@@ -39,17 +40,17 @@ export const routeConfig = [
       },
       {
         path: '/merchant',
-        name: '商户管理',
+        name: '会员管理',
         icon: 'setting',
         parent: 'Home',
         hideMenu: false,
         children: [
           {
             path: '/',
-            name: '菜单管理',
+            name: '会员列表',
             icon: 'menu',
-            parent: 'system',
-            component: () => (<div>2222</div>),
+            parent: 'merchant',
+            component: MerchantUser,
             hideMenu: true
           }
         ]
